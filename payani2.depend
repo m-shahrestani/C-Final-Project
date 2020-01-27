@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1580136944 source:c:\users\mrsh\desktop\project c\payani2\payani2\show.c
+	"show.h"
+	<windows.h>
+
+1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
+
+1580142305 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<string.h>
+	<unistd.h>
+	<windows.h>
+	"show.h"
+	"linkedlist.h"
+
+1580137062 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
+
+1580137312 source:c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	"linkedlist.h"
+
