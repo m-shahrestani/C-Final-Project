@@ -5,7 +5,7 @@
 
 1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
 
-1580142305 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+1580218150 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -13,12 +13,13 @@
 	<string.h>
 	<unistd.h>
 	<windows.h>
+	<conio.h>
 	"show.h"
 	"linkedlist.h"
 
-1580137062 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
+1580215708 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
 
-1580137312 source:c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.c
+1580215937 source:c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.c
 	<stdio.h>
 	<stdlib.h>
 	"linkedlist.h"

@@ -34,43 +34,13 @@ void add_end(struct node *list, struct node * new_node){
 	new_node->next = NULL;
 }
 
-//void remove_node(struct node** list, struct cell t)
-//{
-//	struct node *cur,*temp;
-//	cur=*list;
-//	if((cur->Cell).name==t.name)
-//	{
-//		*list=(*list)->next;
-//		printf("%s has been removed\n",t.name);
-//		free(cur);
-//		return;
-//	}
-//	cur=*list;
-//	while(cur->next!=NULL)
-//	{
-//		if(cur->next->Cell.name!=t.name)
-//		{
-//			cur=cur->next;
-//		}
-//		else
-//		{
-//			temp=cur->next;
-//			cur->next=cur->next->next;
-//			free(temp);
-//			printf("%s has been removed\n",t.name);
-//			return;
-//		}
-//	}
-//	printf("%s does not exist\n",t.name);
-//}
-//
-//void print_list(struct node *list){
-//    struct node * current = list;
-//    int i=1;
-//    while(current != NULL)
-//	{
-//        printf("%s \n",current->Cell.name);
-//        current = current->next;
-//        i++;
-//    }
-//}
+void print_list(struct node *list){
+    struct node * current = list;
+    int i=1;
+    while(current != NULL)
+	{
+        printf("[%d] %s (%d, %d) \n",i,current->Cell.name,current->Cell.x,current->Cell.y);
+        current = current->next;
+        i++;
+    }
+}

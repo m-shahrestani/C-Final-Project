@@ -20,8 +20,6 @@ struct node *create_node(struct cell n);
 
 void add_end(struct node *list, struct node * new_node);
 
-void remove_node(struct node** list, int c);
-
 void print_list(struct node *list);
 
 
