@@ -158,16 +158,16 @@ struct cell randomcell(struct khoone** maps)
 
 struct node* new_cell(int ncell,struct khoone **maps)
 {
-            struct node *cells;
-            struct cell t;
+        struct node *cells;
+        struct cell t;
+        t=randomcell(maps);
+        cells = create_node(t);
+        for(int i=1;i<ncell;i++)
+        {
             t=randomcell(maps);
-            cells = create_node(t);
-            for(int i=1;i<ncell;i++)
-            {
-                t=randomcell(maps);
-                add_end(cells,create_node(t));
-            }
-            return cells;
+            add_end(cells,create_node(t));
+        }
+        return cells;
 }
 struct node*  first_menu(struct khoone **maps)
 {
@@ -221,19 +221,16 @@ void show_cell(struct node* head)
         int j=curr->Cell.y;
         if(i%2==0)
         {
-            gotoxy(10*i+3,3*((n-1)-j)+1);
+            gotoxy(10*i+2,3*((n-1)-j)+1);
         }
         if(i%2!=0)
         {
-            gotoxy(10*i+3,3*((n-1)-j)+1+1);
+            gotoxy(10*i+2,3*((n-1)-j)+1+1);
         }
-        printf("%s",curr->Cell.name);
+        printf("%s-%d",curr->Cell.name,curr->Cell.Energy);
         curr=curr->next;
     }
 }
-
-
-
 
 void main_menu(struct node* head,struct khoone **maps)
 {
@@ -264,13 +261,43 @@ void main_menu(struct node* head,struct khoone **maps)
             show_map(maps);
             show_cell(head);
             gotoxy(0,n*3+2);
-            move_menu(current);
+            move_menu(current,maps);
         break;
         case 2:
-
+            system("cls");
+            show_map(maps);
+            show_cell(head);
+            gotoxy(0,n*3+2);
+            print_list(head);
+            scanf("%d",&code1);
+            i=1;
+            for(current = head;i<code1; current = current->next)
+            {
+                i++;
+            }
+            system("cls");
+            show_map(maps);
+            show_cell(head);
+            gotoxy(0,n*3+2);
+            split(current,head,maps);
         break;
         case 3:
-
+            system("cls");
+            show_map(maps);
+            show_cell(head);
+            gotoxy(0,n*3+2);
+            print_list(head);
+            scanf("%d",&code1);
+            i=1;
+            for(current = head;i<code1; current = current->next)
+            {
+                i++;
+            }
+            system("cls");
+            show_map(maps);
+            show_cell(head);
+            gotoxy(0,n*3+2);
+            boost(current,maps);
         break;
         case 4:
 
@@ -281,7 +308,7 @@ void main_menu(struct node* head,struct khoone **maps)
     }
 }
 
-void move_menu(struct node* cur)
+void move_menu(struct node* cur,struct khoone **maps)
 {
 	printf("[1]North\n");
 	printf("[2]South\n");
@@ -289,32 +316,154 @@ void move_menu(struct node* cur)
 	printf("[4]Northwest\n");
 	printf("[5]Southeast\n");
 	printf("[6]Southwest\n");
-    int code=0;
+    int code = 0;
     scanf("%d",&code);
     switch(code)
     {
         case 1:
-            if((cur->Cell.y)<n-1)
+            if((cur->Cell.y)+1<n&& maps[(cur->Cell.x)][(cur->Cell.y)+1].type!=3&&maps[(cur->Cell.x)][(cur->Cell.y)+1].IsFull==0)
+            {
+                maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                maps[(cur->Cell.x)][(cur->Cell.y)+1].IsFull=1;
                 cur->Cell.y++;
+
+            }
         break;
         case 2:
-            cur->Cell.y+=1;
-            textcolor(94);
+            if(0<=(cur->Cell.y)-1&& maps[(cur->Cell.x)][(cur->Cell.y)-1].type!=3&&maps[(cur->Cell.x)][(cur->Cell.y)-1].IsFull==0)
+            {
+                maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                maps[(cur->Cell.x)][(cur->Cell.y)-1].IsFull=1;
+                cur->Cell.y--;
+            }
         break;
         case 3:
-            textcolor(36);
+            if((cur->Cell.x)%2==0)
+            {
+                if((cur->Cell.x)+1<n && (cur->Cell.y)+1<n && maps[(cur->Cell.x)+1][(cur->Cell.y)+1].type!=3 && maps[(cur->Cell.x)+1][(cur->Cell.y)+1].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)+1][(cur->Cell.y)+1].IsFull=1;
+                    cur->Cell.x++;
+                    cur->Cell.y++;
+                }
+            }
+            else
+            {
+                if((cur->Cell.x)+1<n && maps[(cur->Cell.x)+1][(cur->Cell.y)].type!=3 && maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull=1;
+                    cur->Cell.x++;
+                    cur->Cell.y;
+                }
+            }
         break;
         case 4:
-
+            if((cur->Cell.x)%2==0)
+            {
+                if(0<=(cur->Cell.x)-1 && (cur->Cell.y)+1<n && maps[(cur->Cell.x)-1][(cur->Cell.y)+1].type!=3 && maps[(cur->Cell.x)-1][(cur->Cell.y)+1].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)-1][(cur->Cell.y)+1].IsFull=1;
+                    cur->Cell.x--;
+                    cur->Cell.y++;
+                }
+            }
+            else
+            {
+                if(0<=(cur->Cell.x)-1 && maps[(cur->Cell.x)-1][(cur->Cell.y)].type!=3 && maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull=1;
+                    cur->Cell.x--;
+                }
+            }
         break;
-                break;
         case 5:
-            textcolor(125);
+            if((cur->Cell.x)%2==0)
+            {
+                if((cur->Cell.x)+1<n && maps[(cur->Cell.x)+1][(cur->Cell.y)].type!=3 && maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull=1;
+                    cur->Cell.x++;
+                }
+            }
+            else
+            {
+                if((cur->Cell.x)+1<n && 0<=(cur->Cell.y)-1 && maps[(cur->Cell.x)+1][(cur->Cell.y)-1].type!=3 && maps[(cur->Cell.x)+1][(cur->Cell.y)-1].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)+1][(cur->Cell.y)-1].IsFull=1;
+                    cur->Cell.x++;
+                    cur->Cell.y--;
+                }
+            }
         break;
-                break;
         case 6:
-            textcolor(125);
+            if((cur->Cell.x)%2==0)
+            {
+                if(0<=(cur->Cell.x)-1 && maps[(cur->Cell.x)-1][(cur->Cell.y)].type!=3 && maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull=1;
+                    cur->Cell.x--;
+                }
+            }
+            else
+            {
+                if(0<=(cur->Cell.x)-1 && 0<=(cur->Cell.y)-1 && maps[(cur->Cell.x)-1][(cur->Cell.y)-1].type!=3 && maps[(cur->Cell.x)-1][(cur->Cell.y)-1].IsFull==0)
+                {
+                    maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
+                    maps[(cur->Cell.x)-1][(cur->Cell.y)-1].IsFull=1;
+                    cur->Cell.x--;
+                    cur->Cell.y--;
+                }
+            }
         break;
+    }
+}
+
+void boost(struct node *cur, struct khoone **maps)
+{
+    if(maps[cur->Cell.x][cur->Cell.y].resource!=0)
+    {
+        if(maps[cur->Cell.x][cur->Cell.y].resource>=15)
+        {
+            maps[cur->Cell.x][cur->Cell.y].resource-=15;
+            cur->Cell.Energy+=15;
+        }
+        else
+        {
+            cur->Cell.Energy+=(maps[cur->Cell.x][cur->Cell.y].resource);
+            maps[cur->Cell.x][cur->Cell.y].resource=0;
+        }
+    }
+}
+
+void split(struct node *cur,struct node *head,struct khoone **maps)
+{
+    if(cur->Cell.Energy>=80&&maps[cur->Cell.x][cur->Cell.y].type==2)
+    {
+        int a,b;
+        struct cell t;
+        while(1)
+        {
+            a=(cur->Cell.x)+((rand()%3)-1);
+            b=(cur->Cell.y)+((rand()%3)-1);
+            if(maps[a][b].IsFull == 0&&maps[a][b].type !=3)
+            {
+                maps[a][b].IsFull=1;
+                break;
+            }
+        }
+        t.x=a;
+        t.y=b;
+        t.Energy=40;
+        strcpy(t.name, rand_string(3));
+        add_end(head,create_node(t));
+        cur->Cell.Energy-=40;
     }
 }
 
@@ -335,12 +484,8 @@ int main()
     show_map(maps);
     struct node* head=first_menu(maps);
 
-
     while(1)
     {
-//        char c=getch();
-//        head->Cell.x+= c-'0'-1;
-//        head->Cell.y+= c-'0'-1;
         system("cls");
         show_map(maps);
         show_cell(head);
