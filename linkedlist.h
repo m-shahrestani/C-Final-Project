@@ -1,6 +1,16 @@
 #ifndef LINKEDLIST_H_INCLUDED
 #define LINKEDLIST_H_INCLUDED
 
+int n;
+
+struct khoone
+{
+    int x,y;
+    int type;
+    int resource;
+    int IsFull;
+};
+
 struct cell
 {
     int x,y;
