@@ -8,6 +8,7 @@
 #include <conio.h>
 #include "show.h"
 #include "linkedlist.h"
+
 int n;
 struct khoone
 {
@@ -185,10 +186,10 @@ struct node*  first_menu(struct khoone **maps)
     switch(code)
     {
         case 1:
-
+            loadmaps(maps);
+//            loadcell(void);
         break;
         case 2:
-
             printf("Enter number of cells.");
             scanf("%d",&ncell);
             return new_cell(ncell,maps);
@@ -300,7 +301,12 @@ void main_menu(struct node* head,struct khoone **maps)
             boost(current,maps);
         break;
         case 4:
-
+            system("cls");
+            show_map(maps);
+            show_cell(head);
+            gotoxy(0,n*3+2);
+            savemaps(maps);
+//            savecells(head);
         break;
         case 5:
             exit(0);
@@ -465,6 +471,89 @@ void split(struct node *cur,struct node *head,struct khoone **maps)
         add_end(head,create_node(t));
         cur->Cell.Energy-=40;
     }
+}
+
+void savemaps(struct khoone **maps)
+{
+    FILE *fp;
+    fp=fopen("savemaps.bin","wb");
+    if(fp == NULL)
+    {
+        printf("Cannot make savemaps file.\n");
+        return -1;
+    }
+    for(int i;i<n;i++)
+    {
+        fwrite(maps[i],sizeof(struct khoone),n,fp);
+    }
+    fclose(fp);
+}
+
+void savecell(struct node* head)
+{
+    int ncell=1;
+    FILE *fp;
+	struct node *current;
+	for(current = head; current-> next != NULL; current = current->next)
+	{
+	    ncell++;
+	}
+	fp=fopen("savecell.bin","wb");
+	fwrite(ncell,sizeof(int),1,fp);
+	for(current = head; current-> next != NULL; current = current->next)
+	{
+      //  fwrite(current->Cell,sizeof(struct cell),1,fp);
+    }
+    fclose(fp);
+}
+
+void loadmaps(struct khoone **maps)
+{
+    FILE *fp;
+    struct khoone **mapscopy;
+    //tarif araye dobodi
+    mapscopy = (struct khoone **)malloc(n*sizeof(struct khoone *));
+    for(int i = 0; i < n; i++)
+    {
+        mapscopy[i] = (struct khoone *)malloc(n*sizeof(struct khoone));
+    }
+    fp=fopen("savemaps.bin","rb");
+    if(fp == NULL)
+    {
+        printf("Cannot find savemaps file.\n");
+        return -1;
+    }
+    for(int i;i<n;i++)
+    {
+        fread(mapscopy[i],sizeof(struct khoone),n,fp);
+    }
+    fclose(fp);
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            maps[i][j]=mapscopy[i][j];
+        }
+    }
+}
+
+struct node* loadcell(void)
+{
+    int ncell;
+    FILE *fp;
+    fp=fopen("savecell.bin","rb");
+    fread(ncell,sizeof(int),1,fp);
+    struct node *head;
+    struct cell t;
+    fread(t,sizeof(struct cell),1,fp);
+    head = create_node(t);
+    for(int i=1;i<ncell;i++)
+    {
+        fread(t,sizeof(struct cell),1,fp);
+        add_end(head,create_node(t));
+    }
+    fclose(fp);
+    return head;
 }
 
 /*print map
