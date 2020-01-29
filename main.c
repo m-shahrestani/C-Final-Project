@@ -157,6 +157,25 @@ struct cell randomcell(struct khoone** maps)
     return t;
 }
 
+struct node* loadcell(void)
+{
+    int ncell;
+    FILE *fp;
+    fp=fopen("savecell.bin","rb");
+    fread(&ncell,sizeof(int),1,fp);
+    struct node *head;
+    struct cell t;
+    fread(&t,sizeof(struct cell),1,fp);
+    head = create_node(t);
+    for(int i=1;i<ncell;i++)
+    {
+        fread(&t,sizeof(struct cell),1,fp);
+        add_end(head,create_node(t));
+    }
+    fclose(fp);
+    return head;
+}
+
 struct node* new_cell(int ncell,struct khoone **maps)
 {
         struct node *cells;
@@ -187,7 +206,7 @@ struct node*  first_menu(struct khoone **maps)
     {
         case 1:
             loadmaps(maps);
-//            loadcell(void);
+            return loadcell();
         break;
         case 2:
             printf("Enter number of cells.");
@@ -306,7 +325,9 @@ void main_menu(struct node* head,struct khoone **maps)
             show_cell(head);
             gotoxy(0,n*3+2);
             savemaps(maps);
-//            savecells(head);
+            savecell(head);
+            printf("Game has been saved.");
+            Sleep(1000);
         break;
         case 5:
             exit(0);
@@ -445,6 +466,11 @@ void boost(struct node *cur, struct khoone **maps)
             cur->Cell.Energy+=(maps[cur->Cell.x][cur->Cell.y].resource);
             maps[cur->Cell.x][cur->Cell.y].resource=0;
         }
+        if(cur->Cell.Energy>100)
+        {
+            maps[cur->Cell.x][cur->Cell.y].resource+=cur->Cell.Energy-100;
+            cur->Cell.Energy=100;
+        }
     }
 }
 
@@ -454,15 +480,29 @@ void split(struct node *cur,struct node *head,struct khoone **maps)
     {
         int a,b;
         struct cell t;
-        while(1)
+        int found =0;
+        for(int i=-1; i<2; i++)
         {
-            a=(cur->Cell.x)+((rand()%3)-1);
-            b=(cur->Cell.y)+((rand()%3)-1);
-            if(maps[a][b].IsFull == 0&&maps[a][b].type !=3)
+            for(int j=-1; j<2; j++)
             {
-                maps[a][b].IsFull=1;
-                break;
+                a=(cur->Cell.x)+i;
+                b=(cur->Cell.y)+j;
+                if( (a>= 0 && a<=n-1 && b>= 0 && b<=n-1 ) == 0)
+                    continue;
+                if(maps[a][b].IsFull == 0&&maps[a][b].type !=3)
+                {
+                    maps[a][b].IsFull=1;
+                    found=1;
+                    break;
+                }
             }
+        }
+//
+        if(!found)
+        {
+            Sleep(1000);
+            printf("Impossible.");
+            return;
         }
         t.x=a;
         t.y=b;
@@ -482,9 +522,10 @@ void savemaps(struct khoone **maps)
         printf("Cannot make savemaps file.\n");
         return -1;
     }
-    for(int i;i<n;i++)
+    for(int i=0;i<n;i++)//deghat kon
     {
-        fwrite(maps[i],sizeof(struct khoone),n,fp);
+        for(int j=0;j<n;j++)
+        fwrite(&maps[i][j],sizeof(struct khoone),1,fp);
     }
     fclose(fp);
 }
@@ -494,15 +535,16 @@ void savecell(struct node* head)
     int ncell=1;
     FILE *fp;
 	struct node *current;
-	for(current = head; current-> next != NULL; current = current->next)
+	for(current = head; current->next != NULL; current = current->next)
 	{
 	    ncell++;
+
 	}
 	fp=fopen("savecell.bin","wb");
-	fwrite(ncell,sizeof(int),1,fp);
-	for(current = head; current-> next != NULL; current = current->next)
+	fwrite(&ncell,sizeof(int),1,fp);
+	for(current = head; current != NULL; current = current->next)
 	{
-      //  fwrite(current->Cell,sizeof(struct cell),1,fp);
+        fwrite(&(current->Cell),sizeof(struct cell),1,fp);
     }
     fclose(fp);
 }
@@ -515,7 +557,7 @@ void loadmaps(struct khoone **maps)
     mapscopy = (struct khoone **)malloc(n*sizeof(struct khoone *));
     for(int i = 0; i < n; i++)
     {
-        mapscopy[i] = (struct khoone *)malloc(n*sizeof(struct khoone));
+        mapscopy[i] = (struct khoone*)malloc(n*sizeof(struct khoone));
     }
     fp=fopen("savemaps.bin","rb");
     if(fp == NULL)
@@ -523,37 +565,29 @@ void loadmaps(struct khoone **maps)
         printf("Cannot find savemaps file.\n");
         return -1;
     }
-    for(int i;i<n;i++)
+    for(int i=0;i<n;i++)
     {
-        fread(mapscopy[i],sizeof(struct khoone),n,fp);
+        for(int j=0;j<n;j++){
+        textcolor(10);
+        fread(&mapscopy[i][j],sizeof(struct khoone),1,fp);
+       // printf("we are at[%d][%d] and is %d\n",i,j,mapscopy[i][j].IsFull);
+
+        }
     }
     fclose(fp);
+   // getch();
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < n; j++)
         {
             maps[i][j]=mapscopy[i][j];
+
+         // printf("x= %d ,y= %d ,type= %d ,resource= %d, IsFull= %d \n",mapscopy[i][j].x,mapscopy[i][j].y,mapscopy[i][j].type,mapscopy[i][j].resource,mapscopy[i][j].IsFull);
+
+
         }
     }
-}
 
-struct node* loadcell(void)
-{
-    int ncell;
-    FILE *fp;
-    fp=fopen("savecell.bin","rb");
-    fread(ncell,sizeof(int),1,fp);
-    struct node *head;
-    struct cell t;
-    fread(t,sizeof(struct cell),1,fp);
-    head = create_node(t);
-    for(int i=1;i<ncell;i++)
-    {
-        fread(t,sizeof(struct cell),1,fp);
-        add_end(head,create_node(t));
-    }
-    fclose(fp);
-    return head;
 }
 
 /*print map
@@ -572,7 +606,6 @@ int main()
     struct khoone **maps=load_map();
     show_map(maps);
     struct node* head=first_menu(maps);
-
     while(1)
     {
         system("cls");
