@@ -5,11 +5,11 @@ struct cell randomcell(struct khoone** maps);
 
 struct node* new_cell(int ncell,struct khoone **maps);
 
+struct node* loadcell(void);
+
 void show_cell(struct node* head);
 
 void loadmaps(struct khoone **maps);
-
-struct node* loadcell(void);
 
 void main_menu(struct node* head,struct khoone **maps);
 

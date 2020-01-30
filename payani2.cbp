@@ -38,10 +38,18 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="multiplayer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="multiplayer.h" />
 		<Unit filename="show.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="show.h" />
+		<Unit filename="single player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="single player.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

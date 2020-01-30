@@ -9,6 +9,9 @@
 #include "show.h"
 #include "linkedlist.h"
 
+int nobat=0;
+players=1;
+
 struct khoone** load_map(void)
 {
     FILE* fp=fopen("map6.bin","rb");
@@ -126,50 +129,9 @@ void show_map(struct khoone **maps)
             }
         }
     }
+    textcolor(15);
 }
 
-struct node*  first_menu(struct khoone **maps)
-{
-    system("CLS");
-	printf("[1]Load\n");
-	printf("[2]New single player game\n");
-	printf("[3]New Multiplayer game\n");
-	printf("[4]New single player game with PC\n");
-	printf("[5]Map editor\n");
-	printf("[6]Map convert to text file\n");
-	printf("[7]Exit\n");
-    int code=0;
-    scanf("%d",&code);
-    int ncell=0;
-    switch(code)
-    {
-        case 1:
-            loadmaps(maps);
-            return loadcell();
-        break;
-        case 2:
-            printf("Enter number of cells.");
-            scanf("%d",&ncell);
-            return new_cell(ncell,maps);
-
-        break;
-        case 3:
-
-        break;
-        case 4:
-
-        break;
-        case 5:
-
-        break;
-        case 6:
-
-        break;
-        case 7:
-            exit(0);
-        break;
-    }
-}
 
 /*print map
     for(int i=0;i< n ;i++)
@@ -186,15 +148,105 @@ int main()
     textcolor(10);
     struct khoone **maps=load_map();
     show_map(maps);
-    struct node* head=first_menu(maps);
- //   struct node* head2=first_menu(maps);
+    struct node* head;
+    struct node* head2;
+
+    system("CLS");
+	printf("[1]Load\n");
+	printf("[2]New single player game\n");
+	printf("[3]New Multiplayer game\n");
+	printf("[4]New single player game with PC\n");
+	printf("[5]Map editor\n");
+	printf("[6]Map convert to text file\n");
+	printf("[7]Exit\n");
+    int code=0;
+    scanf("%d",&code);
+    int ncell,n2cell;
+    switch(code)
+    {
+        case 1:
+            loadmaps(maps);
+            head=loadcell();
+            if(players==2)
+                head2=loadcell2();
+        break;
+        case 2:
+            printf("Enter number of cells.");
+            scanf("%d",&ncell);
+            head=new_cell(ncell,maps);
+        break;
+        case 3:
+            printf("Enter number of player 1 cells.");
+            scanf("%d",&ncell);
+            printf("Enter number of player 2 cells.");
+            scanf("%d",&n2cell);
+            head=new_cell(ncell,maps);
+            head2=new_cell(n2cell,maps);
+            players=2;
+        break;
+        case 4:
+
+        break;
+        case 5:
+
+        break;
+        case 6:
+
+        break;
+        case 7:
+            exit(0);
+        break;
+    }
     while(1)
     {
         system("cls");
         show_map(maps);
-        show_cell(head);
-        gotoxy(0,n*3+2);
-        main_menu(head,maps);
+        if(players==1)
+        {
+            gotoxy(0,n*3+2);
+            textcolor(10);
+            show_cell(head);
+            main_menu(head,maps);
+        }
+        if(players==2)
+        {
+            textcolor(10);
+            show_cell(head);
+            textcolor(11);
+            show_cell(head2);
+            if(nobat%2==0)
+            {
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                gotoxy(0,n*3+2);
+                textcolor(10);
+                printf("player 1:\n");
+                main_menu2(head,maps,head2);
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                nobat++;
+            }
+            else
+            {
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                gotoxy(0,n*3+2);
+                textcolor(11);
+                printf("player 2:\n");
+                main_menu2(head2,maps,head);
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                nobat++;
+            }
+        }
     }
     getch();
     return 0;

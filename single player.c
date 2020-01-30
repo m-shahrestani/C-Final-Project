@@ -98,9 +98,10 @@ void loadmaps(struct khoone **maps)
 
 struct node* loadcell(void)
 {
-    int ncell;
+    int ncell,p;
     FILE *fp;
     fp=fopen("savecell.bin","rb");
+    fread(&players,sizeof(int),1,fp);
     fread(&ncell,sizeof(int),1,fp);
     struct node *head;
     struct cell t;
@@ -117,6 +118,8 @@ struct node* loadcell(void)
 
 void main_menu(struct node* head,struct khoone **maps)
 {
+    gotoxy(0,n*3+3);
+    textcolor(15);
 	printf("[1]Move\n");
 	printf("[2]Split a cell\n");
 	printf("[3]Boost energy\n");
@@ -200,6 +203,8 @@ void main_menu(struct node* head,struct khoone **maps)
 
 void move_menu(struct node* cur,struct khoone **maps)
 {
+    gotoxy(0,n*3+3);
+    textcolor(15);
 	printf("[1]North\n");
 	printf("[2]South\n");
 	printf("[3]Northeast\n");
@@ -403,6 +408,7 @@ void savecell(struct node* head)
 
 	}
 	fp=fopen("savecell.bin","wb");
+    fwrite(&players,sizeof(int),1,fp);
 	fwrite(&ncell,sizeof(int),1,fp);
 	for(current = head; current != NULL; current = current->next)
 	{

@@ -5,7 +5,7 @@
 
 1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
 
-1580327572 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+1580343536 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -17,14 +17,26 @@
 	"show.h"
 	"linkedlist.h"
 
-1580327238 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
+1580343536 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
 
 1580215937 source:c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.c
 	<stdio.h>
 	<stdlib.h>
 	"linkedlist.h"
 
-1580327661 source:c:\users\mrsh\desktop\project c\payani2\payani2\single player.c
+1580343411 source:c:\users\mrsh\desktop\project c\payani2\payani2\single player.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<string.h>
+	<unistd.h>
+	<windows.h>
+	<conio.h>
+	"linkedlist.h"
+	"show.h"
+
+1580343411 source:c:\users\mrsh\desktop\project c\payani2\payani2\multiplayer.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
