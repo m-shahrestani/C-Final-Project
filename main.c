@@ -176,9 +176,9 @@ int main()
             head=new_cell(ncell,maps);
         break;
         case 3:
-            printf("Enter number of player 1 cells.");
+            printf("Enter number of player 1 cells:");
             scanf("%d",&ncell);
-            printf("Enter number of player 2 cells.");
+            printf("Enter number of player 2 cells:");
             scanf("%d",&n2cell);
             head=new_cell(ncell,maps);
             head2=new_cell(n2cell,maps);
@@ -188,10 +188,10 @@ int main()
 
         break;
         case 5:
-
+            makemap();
         break;
         case 6:
-
+//            mapconverter();
         break;
         case 7:
             exit(0);

@@ -348,28 +348,15 @@ void split(struct node *cur,struct node *head,struct khoone **maps)
     {
         int a,b;
         struct cell t;
-        int found =0;
-        for(int i=-1; i<2; i++)
+        while(1)
         {
-            for(int j=-1; j<2; j++)
+            a=(cur->Cell.x)+((rand()%3)-1);
+            b=(cur->Cell.y)+((rand()%3)-1);
+            if(maps[a][b].IsFull == 0&&maps[a][b].type !=3&&a<n&&b<n&&0<=a&&0<=b)
             {
-                a=(cur->Cell.x)+i;
-                b=(cur->Cell.y)+j;
-                if( (a>= 0 && a<=n-1 && b>= 0 && b<=n-1 ) == 0)
-                    continue;
-                if(maps[a][b].IsFull == 0&&maps[a][b].type !=3)
-                {
-                    maps[a][b].IsFull=1;
-                    found=1;
-                    break;
-                }
+                maps[a][b].IsFull=1;
+                break;
             }
-        }
-        if(!found)
-        {
-            Sleep(1000);
-            printf("Impossible.");
-            return;
         }
         t.x=a;
         t.y=b;

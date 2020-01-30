@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include "linkedlist.h"
 
-
 char *rand_string(size_t size)
 { // reserves a place for NULL
     char *str = malloc((size + 1) * sizeof(char));

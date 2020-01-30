@@ -8,6 +8,7 @@
 #include <conio.h>
 #include "linkedlist.h"
 #include "show.h"
+#include "multiplayer.h"
 
 void main_menu2(struct node* head,struct khoone **maps,struct node* head2)
 {

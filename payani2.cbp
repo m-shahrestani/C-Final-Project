@@ -38,6 +38,14 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="mapconvert_to_text.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mapconvert_to_text.h" />
+		<Unit filename="mapeditor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mapeditor.h" />
 		<Unit filename="multiplayer.c">
 			<Option compilerVar="CC" />
 		</Unit>
