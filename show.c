@@ -1,5 +1,6 @@
 #include "show.h"
 #include <windows.h>
+
 void textcolor (int color)
 {
     static int __BACKGROUND;

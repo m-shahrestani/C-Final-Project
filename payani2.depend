@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1580136944 source:c:\users\mrsh\desktop\project c\payani2\payani2\show.c
+1580382381 source:c:\users\mrsh\desktop\project c\payani2\payani2\show.c
 	"show.h"
 	<windows.h>
 
 1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
 
-1580373620 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+1580386752 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -16,6 +16,10 @@
 	<conio.h>
 	"show.h"
 	"linkedlist.h"
+	"singleplayer.h"
+	"multiplayer.h"
+	"mapeditor.h"
+	"mapconvert.h"
 
 1580370901 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
 
@@ -54,9 +58,36 @@
 	<stdlib.h>
 	"mapeditor.h"
 
-1580372072 c:\users\mrsh\desktop\project c\payani2\payani2\mapeditor.h
+1580380994 c:\users\mrsh\desktop\project c\payani2\payani2\mapeditor.h
 
-1580373824 source:c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert_to_text.c
+1580382770 source:c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert_to_text.c
+	<stdio.h>
+	<stdlib.h>
+	"mapconvert_to_text.h"
+	"linkedlist.h"
 
 1580342017 c:\users\mrsh\desktop\project c\payani2\payani2\multiplayer.h
+
+1580382293 c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert_to_text.h
+
+1580373942 source:c:\users\mrsh\desktop\project c\payani2\payani2\singleplayer.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<string.h>
+	<unistd.h>
+	<windows.h>
+	<conio.h>
+	"linkedlist.h"
+	"show.h"
+
+1580330021 c:\users\mrsh\desktop\project c\payani2\payani2\singleplayer.h
+
+1580384493 source:c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert.c
+	"stdio.h"
+	"mapconvert.h"
+	"linkedlist.h"
+
+1580383306 c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert.h
 

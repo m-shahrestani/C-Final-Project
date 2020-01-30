@@ -3,5 +3,4 @@
 
 void makemap(void);
 
-
 #endif // MAPEDITOR_H_INCLUDED

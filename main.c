@@ -8,6 +8,10 @@
 #include <conio.h>
 #include "show.h"
 #include "linkedlist.h"
+#include "singleplayer.h"
+#include "multiplayer.h"
+#include "mapeditor.h"
+#include "mapconvert.h"
 
 int nobat=0;
 players=1;
@@ -191,7 +195,7 @@ int main()
             makemap();
         break;
         case 6:
-//            mapconverter();
+            mapconverter(maps);
         break;
         case 7:
             exit(0);

@@ -38,10 +38,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="mapconvert_to_text.c">
+		<Unit filename="mapconvert.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="mapconvert_to_text.h" />
+		<Unit filename="mapconvert.h" />
 		<Unit filename="mapeditor.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -54,10 +54,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="show.h" />
-		<Unit filename="single player.c">
+		<Unit filename="singleplayer.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="single player.h" />
+		<Unit filename="singleplayer.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
