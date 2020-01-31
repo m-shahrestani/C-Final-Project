@@ -19,7 +19,7 @@ n2cell=0;
 
 struct khoone** load_map(void)
 {
-    FILE* fp=fopen("map6.bin","rb");
+    FILE* fp=fopen("map.bin","rb");
     fread(&n,sizeof(int),1,fp);
     struct khoone **maps;
     //tarif araye dobodi
@@ -293,7 +293,7 @@ int main()
                 show_cell(head2);
                 gotoxy(0,n*3+2);
                 textcolor(11);
-                printf("player 2:\n");
+                printf("player PC:\n");
                 main_menu3(head2,maps,head,n2cell);
                 textcolor(10);
                 show_cell(head);
