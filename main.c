@@ -18,7 +18,7 @@ players=1;
 
 struct khoone** load_map(void)
 {
-    FILE* fp=fopen("map6.bin","rb");
+    FILE* fp=fopen("map.bin","rb");
     fread(&n,sizeof(int),1,fp);
     struct khoone **maps;
     //tarif araye dobodi
@@ -189,7 +189,9 @@ int main()
             players=2;
         break;
         case 4:
-
+            printf("Coming soon.\n");
+            getch();
+            exit(0);
         break;
         case 5:
             makemap();

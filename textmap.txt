@@ -1,4 +1,4 @@
 (0, 0)	,type= Energy	,resource= 100
 (0, 1)	,type= Mitosis
 (1, 0)	,type= Forbidden
-(1, 1)	,type= Normal
+(1, 1)	,type= Energy	,resource= 100

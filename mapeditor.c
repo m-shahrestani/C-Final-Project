@@ -84,21 +84,30 @@ void makemap(void)
             if(getch()=='f')
                 break;
             int i,j,t;
-            printf("Enter x:");
+            printf("Enter x:\n");
             scanf("%d",&i);
-            printf("Enter y:");
+            printf("Enter y:\n");
             scanf("%d",&j);
-            printf("Enter new type of block (%d, %d)\n",i,j);
-            printf("[1]Enrgy\n[2]Mitosis\n[3]Forbidden\n[4]Normal\n");
-            scanf("%d",&t);
-            maps[i][j].type=t;
-            if(maps[i][j].type==1)
+            if(0<=i&&i<n&&0<=j&&j<n)
             {
-                maps[i][j].resource=100;
+                printf("Enter new type of block (%d, %d)\n",i,j);
+                printf("[1]Enrgy\n[2]Mitosis\n[3]Forbidden\n[4]Normal\n");
+                scanf("%d",&t);
+                maps[i][j].type=t;
+                if(maps[i][j].type==1)
+                {
+                    maps[i][j].resource=100;
+                }
+                else
+                {
+                    maps[i][j].resource=0;
+                }
             }
             else
             {
-                maps[i][j].resource=0;
+                printf("not exist.\n");
+                getch();
+                continue;
             }
         }
 
