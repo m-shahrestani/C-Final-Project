@@ -196,6 +196,7 @@ int main()
             scanf("%d",&ncell);
             printf("Enter number of player 2 cells:");
             n2cell=1+rand()%(n/2);
+            Sleep(1000);
             printf("%d",n2cell);
             Sleep(2000);
             head=new_cell(ncell,maps);
