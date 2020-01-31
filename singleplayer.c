@@ -348,22 +348,43 @@ void split(struct node *cur,struct node *head,struct khoone **maps)
     {
         int a,b;
         struct cell t;
+        int x=(cur->Cell.x);
+        int y=(cur->Cell.y);
         while(1)
         {
-            a=(cur->Cell.x)+((rand()%3)-1);
-            b=(cur->Cell.y)+((rand()%3)-1);
-            if(maps[a][b].IsFull == 0&&maps[a][b].type !=3&&a<n&&b<n&&0<=a&&0<=b)
+            a=(rand()%3)-1;
+            b=(rand()%3)-1;
+            if((0<=x+a)&&(x+a)<n&&0<=(y+b)&&(y+b)<n)
             {
-                maps[a][b].IsFull=1;
-                break;
+                if((x%2==0&&((a==0&&b==1)||(a==0&&b==-1)||(a==1&&b==1)||(a==1&&b==0)||(a==-1&&b==1)||(a==-1&&b==0)))||(x%2!=0&&((a==0&&b==1)||(a==0&&b==-1)||(a==1&&b==0)||(a==1&&b==-1)||(a==-1&&b==0)||(a==-1&&b==-1))))
+                {
+                    if(maps[x+a][y+b].IsFull == 0&&maps[x+a][y+b].type !=3)
+                    {
+                        maps[x+a][y+b].IsFull=1;
+                        t.x=x+a;
+                        t.y=y+b;
+                        t.Energy=40;
+                        strcpy(t.name, rand_string(3));
+                        add_end(head,create_node(t));
+                        cur->Cell.Energy-=40;
+                        break;
+                    }
+                }
+                if((x%2==0&&(maps[x+0][y+1].IsFull!=0&&maps[x+0][y-1].IsFull!=0
+                                      &&maps[x+1][y+1].IsFull!=0&&maps[x+1][y+0].IsFull!=0
+                                      &&maps[x-1][y+1].IsFull!=0&&maps[x-1][y+0].IsFull!=0))
+                ||(x%2!=0&&(maps[x+0][y+1].IsFull!=0&&maps[x+0][y-1].IsFull!=0
+                                    &&maps[x+1][y+0].IsFull!=0&&maps[x+1][y-1].IsFull!=0
+                                    &&maps[x-1][y+0].IsFull!=0&&maps[x-1][y-1].IsFull!=0)))
+                {
+                       break;
+                }
             }
         }
-        t.x=a;
-        t.y=b;
-        t.Energy=40;
-        strcpy(t.name, rand_string(3));
-        add_end(head,create_node(t));
-        cur->Cell.Energy-=40;
+
+
+//        (maps[x+a][y+b].IsFull == 1&&(((x%2==0)&&((a==0&&b==1)&&(a==0&&b==-1)&&(a==1&&b==1)&&(a==1&&b==0)&&(a==-1&&b==1)&&(a==-1&&b==0)))||((x%2!=0)&&((a==0&&b==1)&&(a==0&&b==-1)&&(a==1&&b==0)&&(a==1&&b==-1)&&(a==-1&&b==0)&&(a==-1&&b==-1)))))
+
     }
 }
 

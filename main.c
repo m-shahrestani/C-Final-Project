@@ -62,9 +62,9 @@ void show_map(struct khoone **maps)
                     for(int t = 5 * j; t < 5 * j + 5; t ++)
                     {
                         if(i % 2 == 0)
-                            a[k][t] = 112;
+                            a[k][t] =112;
                         else
-                            a[k][t] = 48;
+                            a[k][t] =48;
                     }
             }
             else
