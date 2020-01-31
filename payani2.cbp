@@ -58,6 +58,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="singleplayer.h" />
+		<Unit filename="withpc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="withpc.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

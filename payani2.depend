@@ -5,7 +5,7 @@
 
 1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
 
-1580488839 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+1580491426 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -92,4 +92,20 @@
 	"linkedlist.h"
 
 1580383306 c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert.h
+
+1580491452 source:c:\users\mrsh\desktop\project c\payani2\payani2\withpc.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<string.h>
+	<unistd.h>
+	<windows.h>
+	<conio.h>
+	"linkedlist.h"
+	"show.h"
+	"multiplayer.h"
+	"withpc.h"
+
+1580491426 c:\users\mrsh\desktop\project c\payani2\payani2\withpc.h
 

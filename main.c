@@ -18,7 +18,7 @@ players=1;
 
 struct khoone** load_map(void)
 {
-    FILE* fp=fopen("map.bin","rb");
+    FILE* fp=fopen("map6.bin","rb");
     fread(&n,sizeof(int),1,fp);
     struct khoone **maps;
     //tarif araye dobodi
@@ -190,8 +190,15 @@ int main()
         break;
         case 4:
             printf("Coming soon.\n");
-            getch();
-            exit(0);
+            printf("Enter number of player 1 cells:");
+            scanf("%d",&ncell);
+            printf("Enter number of player 2 cells:");
+            n2cell=1+rand()%(n/2);
+            printf("%d",n2cell);
+            Sleep(2000);
+            head=new_cell(ncell,maps);
+            head2=new_cell(n2cell,maps);
+            players=2;
         break;
         case 5:
             makemap();
@@ -214,7 +221,7 @@ int main()
             show_cell(head);
             main_menu(head,maps);
         }
-        if(players==2)
+        if(players==2&&code==3)
         {
             textcolor(10);
             show_cell(head);
@@ -246,6 +253,45 @@ int main()
                 textcolor(11);
                 printf("player 2:\n");
                 main_menu2(head2,maps,head);
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                nobat++;
+            }
+        }
+        if(players==2&&code==4)
+        {
+            textcolor(10);
+            show_cell(head);
+            textcolor(11);
+            show_cell(head2);
+            if(nobat%2==0)
+            {
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                gotoxy(0,n*3+2);
+                textcolor(10);
+                printf("player 1:\n");
+                main_menu2(head,maps,head2);
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                nobat++;
+            }
+            else
+            {
+                textcolor(10);
+                show_cell(head);
+                textcolor(11);
+                show_cell(head2);
+                gotoxy(0,n*3+2);
+                textcolor(11);
+                printf("player 2:\n");
+                main_menu3(head2,maps,head,n2cell);
                 textcolor(10);
                 show_cell(head);
                 textcolor(11);
