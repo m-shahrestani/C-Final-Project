@@ -1,7 +1,7 @@
 #ifndef LINKEDLIST_H_INCLUDED
 #define LINKEDLIST_H_INCLUDED
 
-int n,players;
+int n,players,n2cell;;
 
 struct khoone
 {

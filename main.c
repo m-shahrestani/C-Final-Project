@@ -15,6 +15,7 @@
 
 int nobat=0;
 players=1;
+n2cell=0;
 
 struct khoone** load_map(void)
 {
@@ -165,13 +166,15 @@ int main()
 	printf("[7]Exit\n");
     int code=0;
     scanf("%d",&code);
-    int ncell,n2cell;
+    int ncell;
     switch(code)
     {
         case 1:
             loadmaps(maps);
             head=loadcell();
             if(players==2)
+                head2=loadcell2();
+            if(players==3)
                 head2=loadcell2();
         break;
         case 2:
@@ -189,7 +192,6 @@ int main()
             players=2;
         break;
         case 4:
-            printf("Coming soon.\n");
             printf("Enter number of player 1 cells:");
             scanf("%d",&ncell);
             printf("Enter number of player 2 cells:");
@@ -198,7 +200,7 @@ int main()
             Sleep(2000);
             head=new_cell(ncell,maps);
             head2=new_cell(n2cell,maps);
-            players=2;
+            players=3;
         break;
         case 5:
             makemap();
@@ -221,7 +223,7 @@ int main()
             show_cell(head);
             main_menu(head,maps);
         }
-        if(players==2&&code==3)
+        if(players==2)
         {
             textcolor(10);
             show_cell(head);
@@ -260,7 +262,7 @@ int main()
                 nobat++;
             }
         }
-        if(players==2&&code==4)
+        if(players==3)
         {
             textcolor(10);
             show_cell(head);

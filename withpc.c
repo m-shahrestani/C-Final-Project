@@ -23,7 +23,13 @@ void main_menu3(struct node* head,struct khoone **maps,struct node* head2,int n2
     int code=0;
     int code1=0;
 	struct node *current;
-	code=1;
+	int t=(1+rand()%100);
+	if(t<=70)
+        code=1;
+    if(70<t&&t<=80)
+        code=2;
+    if(80<t&&t<=100)
+        code =3;
     printf("%d",code);
     Sleep(2000);
     if(code<1||code>5)
@@ -42,7 +48,7 @@ void main_menu3(struct node* head,struct khoone **maps,struct node* head2,int n2
             print_list(head);
             code1=1+rand()%n2cell;
             printf("%d",code1);
-            Sleep(1000);
+            Sleep(2000);
             int i=1;
             for(current = head;i<code1; current = current->next)
             {
@@ -68,7 +74,9 @@ void main_menu3(struct node* head,struct khoone **maps,struct node* head2,int n2
             textcolor(15);
             gotoxy(0,n*3+2);
             print_list(head);
-            scanf("%d",&code1);
+            code1=1+rand()%n2cell;
+            printf("%d",code1);
+            Sleep(2000);
             i=1;
             for(current = head;i<code1; current = current->next)
             {
@@ -94,7 +102,9 @@ void main_menu3(struct node* head,struct khoone **maps,struct node* head2,int n2
             textcolor(15);
             gotoxy(0,n*3+2);
             print_list(head);
-            scanf("%d",&code1);
+            code1=1+rand()%n2cell;
+            printf("%d",code1);
+            Sleep(2000);
             i=1;
             for(current = head;i<code1; current = current->next)
             {

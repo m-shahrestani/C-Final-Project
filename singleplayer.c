@@ -75,11 +75,6 @@ void loadmaps(struct khoone **maps)
         mapscopy[i] = (struct khoone*)malloc(n*sizeof(struct khoone));
     }
     fp=fopen("savemaps.bin","rb");
-    if(fp == NULL)
-    {
-        printf("Cannot find savemaps file.\n");
-        return -1;
-    }
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
@@ -102,6 +97,7 @@ struct node* loadcell(void)
     int ncell,p;
     FILE *fp;
     fp=fopen("savecell.bin","rb");
+    fread(&n2cell,sizeof(int),1,fp);
     fread(&players,sizeof(int),1,fp);
     fread(&ncell,sizeof(int),1,fp);
     struct node *head;
@@ -409,11 +405,6 @@ void savemaps(struct khoone **maps)
 {
     FILE *fp;
     fp=fopen("savemaps.bin","wb");
-    if(fp == NULL)
-    {
-        printf("Cannot make savemaps file.\n");
-        return -1;
-    }
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
@@ -433,11 +424,7 @@ void savecell(struct node* head)
 
 	}
 	fp=fopen("savecell.bin","wb");
-    if(fp == NULL)
-    {
-        printf("Cannot make savecell file.\n");
-        return -1;
-    }
+    fwrite(&n2cell,sizeof(int),1,fp);
     fwrite(&players,sizeof(int),1,fp);
 	fwrite(&ncell,sizeof(int),1,fp);
 	for(current = head; current != NULL; current = current->next)

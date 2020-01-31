@@ -5,7 +5,7 @@
 
 1580136902 c:\users\mrsh\desktop\project c\payani2\payani2\show.h
 
-1580491426 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
+1580494870 source:c:\users\mrsh\desktop\project c\payani2\payani2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -21,7 +21,7 @@
 	"mapeditor.h"
 	"mapconvert.h"
 
-1580370901 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
+1580494870 c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.h
 
 1580372003 source:c:\users\mrsh\desktop\project c\payani2\payani2\linkedlist.c
 	<stdio.h>
@@ -72,7 +72,7 @@
 
 1580382293 c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert_to_text.h
 
-1580489401 source:c:\users\mrsh\desktop\project c\payani2\payani2\singleplayer.c
+1580494870 source:c:\users\mrsh\desktop\project c\payani2\payani2\singleplayer.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -93,7 +93,7 @@
 
 1580383306 c:\users\mrsh\desktop\project c\payani2\payani2\mapconvert.h
 
-1580491452 source:c:\users\mrsh\desktop\project c\payani2\payani2\withpc.c
+1580492984 source:c:\users\mrsh\desktop\project c\payani2\payani2\withpc.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -107,5 +107,5 @@
 	"multiplayer.h"
 	"withpc.h"
 
-1580491426 c:\users\mrsh\desktop\project c\payani2\payani2\withpc.h
+1580491759 c:\users\mrsh\desktop\project c\payani2\payani2\withpc.h
 
