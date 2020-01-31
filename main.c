@@ -154,7 +154,7 @@ int main()
     show_map(maps);
     struct node* head;
     struct node* head2;
-
+    PlaySound(TEXT("sounds\\pacman_beginning.wav"),0,SND_ASYNC);
     system("CLS");
 	printf("[1]Load\n");
 	printf("[2]New single player game\n");

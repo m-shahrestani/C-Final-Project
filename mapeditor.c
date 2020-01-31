@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "mapeditor.h"
 #include "linkedlist.h"
 
@@ -40,8 +41,12 @@ void makemap(void)
         printf("Enter name of map:");
         scanf("%s",&str);
         strcat(str,".bin");
-
         FILE* fp=fopen(str,"rb");
+        if(fp == NULL)
+        {
+            printf("Cannot find file.\n");
+            return -1;
+        }
         fread(&m,sizeof(int),1,fp);
         struct khoone **maps;
         //tarif araye dobodi
@@ -112,7 +117,12 @@ void makemap(void)
         }
 
         fp=fopen(str,"wb");
-        fwrite(&m,sizeof(int),1,fp);
+        if(fp == NULL)
+        {
+            printf("Cannot make file.\n");
+            return -1;
+        }
+            fwrite(&m,sizeof(int),1,fp);
         for(int i=0;i< m ;i++)
         {
             for(int j=0;j<m;j++)

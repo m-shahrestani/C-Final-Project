@@ -23,6 +23,8 @@ void main_menu2(struct node* head,struct khoone **maps,struct node* head2)
     int code1=0;
 	struct node *current;
     scanf("%d",&code);
+    if(code<1||code>5)
+        return;
     switch(code)
     {
         case 1:
@@ -115,6 +117,7 @@ void main_menu2(struct node* head,struct khoone **maps,struct node* head2)
             savemaps(maps);
             savecell(head);
             savecell2(head2);
+            PlaySound(TEXT("sounds\\pacman_chomp.wav"),0,SND_ASYNC);
             printf("Game has been saved.");
             Sleep(1000);
         break;

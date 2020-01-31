@@ -65,6 +65,7 @@ void show_cell(struct node* head)
 
 void loadmaps(struct khoone **maps)
 {
+    PlaySound(TEXT("sounds\\pacman_intermission.wav"),0,SND_ASYNC);
     FILE *fp;
     struct khoone **mapscopy;
     //tarif araye dobodi
@@ -129,6 +130,8 @@ void main_menu(struct node* head,struct khoone **maps)
     int code1=0;
 	struct node *current;
     scanf("%d",&code);
+    if(code<1||code>5)
+        return;
     switch(code)
     {
         case 1:
@@ -192,6 +195,7 @@ void main_menu(struct node* head,struct khoone **maps)
             gotoxy(0,n*3+2);
             savemaps(maps);
             savecell(head);
+            PlaySound(TEXT("sounds\\pacman_chomp.wav"),0,SND_ASYNC);
             printf("Game has been saved.");
             Sleep(1000);
         break;
@@ -213,6 +217,8 @@ void move_menu(struct node* cur,struct khoone **maps)
 	printf("[6]Southwest\n");
     int code = 0;
     scanf("%d",&code);
+    if(code<1||code>6)
+        return;
     switch(code)
     {
         case 1:
@@ -221,7 +227,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                 maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
                 maps[(cur->Cell.x)][(cur->Cell.y)+1].IsFull=1;
                 cur->Cell.y++;
-
+                PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
             }
         break;
         case 2:
@@ -230,6 +236,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                 maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
                 maps[(cur->Cell.x)][(cur->Cell.y)-1].IsFull=1;
                 cur->Cell.y--;
+                PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
             }
         break;
         case 3:
@@ -241,6 +248,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)+1][(cur->Cell.y)+1].IsFull=1;
                     cur->Cell.x++;
                     cur->Cell.y++;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
             else
@@ -251,6 +259,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull=1;
                     cur->Cell.x++;
                     cur->Cell.y;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
         break;
@@ -263,6 +272,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)-1][(cur->Cell.y)+1].IsFull=1;
                     cur->Cell.x--;
                     cur->Cell.y++;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
             else
@@ -272,6 +282,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
                     maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull=1;
                     cur->Cell.x--;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
         break;
@@ -283,6 +294,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
                     maps[(cur->Cell.x)+1][(cur->Cell.y)].IsFull=1;
                     cur->Cell.x++;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
             else
@@ -293,6 +305,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)+1][(cur->Cell.y)-1].IsFull=1;
                     cur->Cell.x++;
                     cur->Cell.y--;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
         break;
@@ -304,6 +317,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)][(cur->Cell.y)].IsFull=0;
                     maps[(cur->Cell.x)-1][(cur->Cell.y)].IsFull=1;
                     cur->Cell.x--;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
             else
@@ -314,6 +328,7 @@ void move_menu(struct node* cur,struct khoone **maps)
                     maps[(cur->Cell.x)-1][(cur->Cell.y)-1].IsFull=1;
                     cur->Cell.x--;
                     cur->Cell.y--;
+                    PlaySound(TEXT("sounds\\pacman_eatfruit.wav"),0,SND_ASYNC);
                 }
             }
         break;
@@ -324,6 +339,7 @@ void boost(struct node *cur, struct khoone **maps)
 {
     if(maps[cur->Cell.x][cur->Cell.y].resource!=0)
     {
+        PlaySound(TEXT("sounds\\pacman_eatghost.wav"),0,SND_ASYNC);
         if(maps[cur->Cell.x][cur->Cell.y].resource>=15)
         {
             maps[cur->Cell.x][cur->Cell.y].resource-=15;
@@ -367,6 +383,7 @@ void split(struct node *cur,struct node *head,struct khoone **maps)
                         strcpy(t.name, rand_string(3));
                         add_end(head,create_node(t));
                         cur->Cell.Energy-=40;
+                        PlaySound(TEXT("sounds\\pacman_death.wav"),0,SND_ASYNC);
                         break;
                     }
                 }
@@ -397,7 +414,7 @@ void savemaps(struct khoone **maps)
         printf("Cannot make savemaps file.\n");
         return -1;
     }
-    for(int i=0;i<n;i++)//deghat kon
+    for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
         fwrite(&maps[i][j],sizeof(struct khoone),1,fp);
@@ -416,6 +433,11 @@ void savecell(struct node* head)
 
 	}
 	fp=fopen("savecell.bin","wb");
+    if(fp == NULL)
+    {
+        printf("Cannot make savecell file.\n");
+        return -1;
+    }
     fwrite(&players,sizeof(int),1,fp);
 	fwrite(&ncell,sizeof(int),1,fp);
 	for(current = head; current != NULL; current = current->next)
